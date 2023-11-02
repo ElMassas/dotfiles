@@ -8,7 +8,8 @@
     "editor.largeFileOptimizations": false,
     "editor.multiCursorLimit": 100000,
     "editor.wordWrap": "on",
-    "terminal.integrated.fontFamily": "monospace",
+    "editor.renderControlCharacters": false,
+    
   
     "javascript.updateImportsOnFileMove.enabled": "always",
     "launch": {},
@@ -45,8 +46,8 @@
     // sonar
     "sonarlint.connectedMode.connections.sonarqube": [
       {
-        "serverUrl": "https://sonarqube-app.prd.worten.net",
-        "connectionId": "https-sonarqube-app-prd-worten-net",
+        "serverUrl": "https://<redacted>",
+        "connectionId": "https-<redacted>",
         "disableNotifications": true
       }
     ],
@@ -56,7 +57,6 @@
       "editor.defaultFormatter": "ms-python.black-formatter",
       "editor.formatOnSave": true
     },
-
     "go.toolsManagement.autoUpdate": true,
   
     // vim settings
@@ -123,7 +123,10 @@
       { "before": ["leader", "c"], "commands": ["editor.action.commentLine"] }
     ],
     "workbench.settings.openDefaultKeybindings": true,
-    "editor.renderControlCharacters": false
     
-}
+    
+    // Terminal
+    "terminal.integrated.defaultProfile.osx": "zsh",
+    "terminal.integrated.fontFamily": "monospace"
+  }
   

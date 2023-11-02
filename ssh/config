@@ -1,0 +1,10 @@
+Host github.com
+  AddKeysToAgent yes
+  UseKeychain yes
+  IdentityFile ~/.ssh/redacted_auth_key
+  IdentityFile ~/.ssh/redacted_sign_key
+
+Host work.git.com
+  AddKeysToAgent yes
+  UseKeychain yes
+  IdentityFile ~/.ssh/work_key
