@@ -81,3 +81,10 @@ Security and privacy is something very important to keep in mind, that being sai
    - [hosts](https://github.com/tiiiecherle/osx_install_config)
 - Check:
    - [install_configs](https://github.com/tiiiecherle/osx_install_config)
+
+
+### Inspiration:
+
+- [Primeagen dotfiles](https://github.com/ThePrimeagen/.dotfiles)
+- [Primeagen dev-producitivity](https://github.com/ThePrimeagen/dev-productivity)
+- [Lissy93 dotfiles](https://github.com/Lissy93/dotfiles/tree/master)
