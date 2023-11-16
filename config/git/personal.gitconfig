@@ -1,7 +1,7 @@
 [user]
 	name = Miguel Luis
-	email = <redacted>
-        signingkey = ~/.ssh/<redacted>_sign_key
+	email = work@elmassas.pt
+	signingkey = ~/.ssh/<redacted>
 [init]
 	defaultBranch = master
 [pull]
@@ -18,4 +18,4 @@
 	smudge = git-lfs smudge -- %f
 	process = git-lfs filter-process
 [web]
-	browser = firefox
+	browser = firefox  

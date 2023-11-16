@@ -1,0 +1,6 @@
+[user]
+	name = Miguel Luis
+	email = mfgluis@ext.worten.pt
+    signingkey = ~/.ssh/<redacted>
+[core]
+	autocrlf = input

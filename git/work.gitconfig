@@ -1,6 +1,0 @@
-[user]
-	name = Miguel Luis
-	email = <redacted>
-        signingkey = ~/.ssh/redacted
-[core]
-	autocrlf = input
