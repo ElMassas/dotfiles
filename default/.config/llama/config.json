@@ -1,0 +1,9 @@
+{
+  "model_settings": {
+    "llama-3.1": {
+      "ask_before_request": true,
+      "timeout": 5000,
+      "max_input_length": 8192
+    }
+  }
+}

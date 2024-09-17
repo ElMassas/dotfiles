@@ -22,6 +22,8 @@ Variable | Location
 
 ### Security 
 
+TO_DO!
+
 Security and privacy is something very important to keep in mind, that being said, it's impossible to maintain a secure and updated system. In this dotfiles project I have some automation's to increase general security and some specific automation's to macOS.
 
 1. Global `.gitignore` to make sure that you are not pushing any credentials to a remote target
@@ -34,45 +36,10 @@ Security and privacy is something very important to keep in mind, that being sai
 
 ### Project layout
 
-<pre>
-~
-└──.
-   ├── <a href="https://github.com/ElMassas/dotfiles/tree/master/config">config/</a>               # All configuration files
-   │   ├── firefox
-   │   │   └──pref.js
-   │   ├── git
-   │   │   ├── personal.gitconfig
-   │   │   └── work.gitconfig
-   │   ├── ssh
-   │   │   └── config
-   │   ├── tmux
-   │   ├── vscode
-   │   │   ├── extensions.json
-   │   │   ├── keybindings.json
-   │   │   └──settings.json
-   │   └── zsh
-   │       └──lib
-   │           ├── aliases.zsh
-   │           ├── completions.zsh
-   │           ├── history.zsh
-   │           └── key_bindings.zsh
-   ├── <a href="https://github.com/ElMassas/dotfiles/tree/master/scripts">scripts/</a>               # All scripts to update or install services
-   │   └── macos
-   │       ├── Brewfile
-   │       ├── check_defaults.sh
-   │       ├── macos-apps.sh
-   │       ├── macos-preferences.sh
-   │       └── macos-security.sh
-   └── <a href="https://github.com/ElMassas/dotfiles/tree/master/scripts">utils/</a>            # Useful functions to be able to run  
-    └── containers.zsh
-</pre>
-
 ## TODO
 
 - Add:
-   - NeoVim configs
    - Tmux configs
-   - Stevenblack hosts zsh function linked to a cron job to regularly update local machine
 - Properly write up macos set up scripts with this in mind:
    - [macOS-Privacy-and-security-guide](https://github.com/drduh/macOS-Security-and-Privacy-Guide)
    - [macOS-security](https://github.com/usnistgov/macos_security)
