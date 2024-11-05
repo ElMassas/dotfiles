@@ -1,0 +1,21 @@
+[includeIf "gitdir:~/Desktop/work/redacted/"]
+    path = ~/.config/git/work.gitconfig
+[includeIf "gitdir:~/Desktop/personal/"]
+    path = ~/.config/git/personal.gitconfig
+[includeIf "gitdir:~/Documents/"]
+    path = ~/.config/git/personal.gitconfig
+[includeIf "gitdir:~/Desktop/work/redacted/"]
+    path = ~/.config/git/personal.gitconfig
+[core]
+	eol = lf
+	autocrlf = false
+[fsck]
+	zeroPaddedFilemode = ignore
+[fetch "fsck"]
+	zeroPaddedFilemode = ignore
+[receive "fsck"]
+	zeroPaddedFilemode = ignore
+[oh-my-zsh]
+	lastVersion = 15ffbdd346daa58de6701d3421787012420aa6cc
+[extensions]
+	partialClone = true
