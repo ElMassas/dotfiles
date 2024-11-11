@@ -43,12 +43,6 @@ Variable | Location
 
 - Add:
    - Nix package manager
-- Properly write up macos set up scripts with this in mind:
-   - [macOS-Privacy-and-security-guide](https://github.com/drduh/macOS-Security-and-Privacy-Guide)
-   - [macOS-security](https://github.com/usnistgov/macos_security)
-   - [osx-security-awesome](https://github.com/kai5263499/osx-security-awesome)
-   - [Lissy93/dotfiles](https://github.com/Lissy93/dotfiles/tree/master/scripts/macos-setup)
-   - [hosts](https://github.com/tiiiecherle/osx_install_config)
 - Check:
    - [MacOS security audit cross check](https://www.tenable.com/audits/DISA_STIG_Apple_macOS_14_Sonoma_v2r1)
    - [install_configs](https://github.com/tiiiecherle/osx_install_config)
