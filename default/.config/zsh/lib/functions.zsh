@@ -32,3 +32,7 @@ vf() {
         bat "$FILE"
     fi
 }
+
+to_do {
+  docker-compose -f $HOME/Desktop/personal/to_do/docker-compose.yml up -d
+}

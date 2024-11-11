@@ -1,0 +1,2 @@
+# Run update_hosts function every two weeks on Sunday at midnight
+0 0 * * 0 root [ $(($(date +\%s) / 604800 % 2)) -eq 1 ] && update_hosts

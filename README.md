@@ -20,13 +20,16 @@ Variable | Location
 
 ### Tools
 
-- Terminal
-Using [kitty](https://github.com/topics/kitty) which has a lot cool features by default, which for example, remove the need to install and configure tmux.
-- Homebrew to fetch some packages Nix cannot
-- Llama to run some AI models locally
-- zsh + oh-my-zsh to make sure terminal is gucci
-- Podman and docker for running containers locally
-
+- Using [kitty](https://github.com/topics/kitty) which has a lot cool features by default, which for example, remove the need to install and configure tmux.
+- Homebrew to fetch some packages Nix cannot.
+- Aerospace for window management.
+- MonitorControl for monitor britness managment.
+- Llama to run some AI models locally.
+- zsh + oh-my-zsh to manage shell.
+- Podman and docker for running containers locally.
+- Sniffnet to monitor internet traffic.
+- Santa for binary authorization and system monitoring.
+- Many other miscellaneous tools to improve the life of terminal goblins.
 
 ### Security 
 
@@ -47,6 +50,7 @@ Using [kitty](https://github.com/topics/kitty) which has a lot cool features by 
    - [Lissy93/dotfiles](https://github.com/Lissy93/dotfiles/tree/master/scripts/macos-setup)
    - [hosts](https://github.com/tiiiecherle/osx_install_config)
 - Check:
+   - [MacOS security audit cross check](https://www.tenable.com/audits/DISA_STIG_Apple_macOS_14_Sonoma_v2r1)
    - [install_configs](https://github.com/tiiiecherle/osx_install_config)
 
 
@@ -56,3 +60,4 @@ Using [kitty](https://github.com/topics/kitty) which has a lot cool features by 
 - [Primeagen dotfiles](https://github.com/ThePrimeagen/.dotfiles)
 - [Primeagen dev-producitivity](https://github.com/ThePrimeagen/dev-productivity)
 - [Lissy93 dotfiles](https://github.com/Lissy93/dotfiles/tree/master)
+- [Maximbax dotfiles](https://github.com/maximbaz/dotfiles/tree/08d5b2daff6b226dad47685c994d842d99a86ee7)
