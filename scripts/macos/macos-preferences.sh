@@ -2,9 +2,6 @@
 
 set -x
 
-# Need to update script to include some other security concerns
-# like require admin permission for physical connectivity
-
 # Quit System Preferences before starting
 osascript -e 'tell application "System Preferences" to quit'
 
@@ -15,7 +12,6 @@ while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 # Set Device Info #
 ###################
 
-# Set computer name and hostname
 sudo scutil --set ComputerName "Macbook"
 sudo scutil --set HostName "MacbookHost"
 sudo scutil --set LocalHostName "MacbookLocalHost"
@@ -286,7 +282,7 @@ defaults write com.apple.dock expose-group-by-app -bool false
 
 defaults write com.apple.TimeMachine DoNotOfferNewDisksForBackup -bool true
 
-hash tmutil &> /dev/null && sudo tmutil disablelocal
+hash tmutil &> /dev/null && sudo tmutil disable
 
 ####################
 # Activity Monitor #
@@ -383,3 +379,20 @@ cupsctl --no-remote-any
 cupsctl --no-remote-admin
 sudo defaults write /Library/Preferences/SystemConfiguration/com.apple.captive.control.plist Active -bool false
 
+###########################
+# Remote Desktopo sharing #
+###########################
+
+sudo /System/Library/CoreServices/RemoteManagement/ARDAgent.app/Contents/Resources/kickstart -deactivate -configure -access -off
+
+############
+# Infrared #
+############
+
+sudo defaults write /Library/Preferences/com.apple.driver.AppleIRController DeviceEnabled -int 0
+
+#######################
+# Remote apple events #
+#######################
+
+sudo systemsetup -setremoteappleevents off

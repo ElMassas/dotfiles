@@ -38,6 +38,7 @@ Variable | Location
 3. MacOS specs to increase privacy and decrease attack surface
 4. Encrypted disks with [VeraCrypt](https://www.veracrypt.fr/en/Home.html)
 5. DNSSEC with [NextDNS](https://nextdns.io/)
+6. MAC address spoofing with linkliar
 
 ## TODO
 
@@ -55,3 +56,5 @@ Variable | Location
 - [Primeagen dev-producitivity](https://github.com/ThePrimeagen/dev-productivity)
 - [Lissy93 dotfiles](https://github.com/Lissy93/dotfiles/tree/master)
 - [Maximbax dotfiles](https://github.com/maximbaz/dotfiles/tree/08d5b2daff6b226dad47685c994d842d99a86ee7)
+- [Mac-os-command-line](https://git.herrbischoff.com/awesome-macos-command-line/about/#proxy-icon)
+- [The Future Of macOS, Freedom, Security And Privacy In An Increasingly Hostile Global Environment](https://gist.github.com/iosecure/357e724811fe04167332ef54e736670d)

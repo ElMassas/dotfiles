@@ -24,15 +24,24 @@ update_hosts() {
     sudo killall -HUP mDNSResponder
 }
 
-vf() {
+cat() {
     local FILE="$1"
     if [[ "$FILE" == *.md ]]; then
         mdcat "$FILE"
     else
-        bat "$FILE"
+        cat "$FILE"
     fi
 }
 
-to_do {
+to_do() {
   docker-compose -f $HOME/Desktop/personal/to_do/docker-compose.yml up -d
+}
+
+connected_devices() {
+  system_profiler SPUSBDataType
+}
+
+dns_cache_flush() {
+  sudo dscacheutil -flushcache && \
+  sudo killall -HUP mDNSResponder
 }
