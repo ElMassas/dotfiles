@@ -20,9 +20,17 @@ These are my settings: [Link](https://github.com/ElMassas/dotfiles/blob/main/scr
 
 #### Physical connected devices must have admin permission
 
+As far I could accertain from searching online and taking a lot around the available configurations file in the systems, this cannot be done via the terminal. **So**, to make sure physical devices attempting to connect to your computer must have permission, go to:
+
+1. System settings
+2. Privacy & security
+3. Make sure the setting: "Allow accessories to connect" has the option: "Ask Every Time"
+
 ## Access control
 
 #### User lvl
+
+
 
 #### Application lvl
 
@@ -30,7 +38,12 @@ These are my settings: [Link](https://github.com/ElMassas/dotfiles/blob/main/scr
 
 #### DNS
 
+For DNS privacy and security I decided to go with NextDNS as an upstream DNS resolver, and UNBOUND as a local stub.
+I am trying to enforce DNSSEC whenever possible.
+
 #### Hosts
+
+The hosts file is one of the first pitstops on DNS resolution and network operations in general, so having a hosts file that eliminates some possible sources of danger is a good approach.
 
 #### Firewall
 
