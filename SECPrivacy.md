@@ -30,15 +30,17 @@ As far I could accertain from searching online and taking a lot around the avail
 
 #### User lvl
 
-
+User segreatation with admin and non admin account. Pretty standard
 
 #### Application lvl
+
+Was originally planning on using Santa from google but had a lot of issues getting it to work as expected, so moved on to BlockBLock
 
 ## Network
 
 #### DNS
 
-For DNS privacy and security I decided to go with NextDNS as an upstream DNS resolver, and UNBOUND as a local stub.
+For DNS privacy and security I decided to go with [NextDNS](https://nextdns.io/) as an upstream DNS resolver, and [UNBOUND](https://github.com/NLnetLabs/unbound) as a local stub.
 I am trying to enforce DNSSEC whenever possible.
 
 #### Hosts
@@ -50,6 +52,8 @@ The hosts file is one of the first pitstops on DNS resolution and network operat
 I use both the default MacOS Firewall and [Lulu](https://github.com/objective-see/LuLu). You can see the configurations on the lulu.sh script
 
 #### M.A.C adress spoofing
+
+Using [LinkLiar](https://github.com/halo/LinkLiar)
 
 ## Fingerprinting
 
@@ -72,16 +76,3 @@ Sillicon macs still seem to be a bit fickle in what concerns containerization, s
 Podman is usually safer and faster, both because of the underlying engine and that it doesn't require root lvl access. I have however returned to docker for now, due to job requirements. For everyone else I highly recommend using podman.
 I have not tested [vagrant](https://github.com/hashicorp/vagrant) but it seems insteresting.
 
-
-# Resources
-
-
-
-Update this file to reflect all security concerns
-
-
-1. Global `.gitignore` to make sure that you are not pushing any credentials to a remote target
-2. Regularly updated hosts file to block malicious websites.
-3. MacOS specs to increase privacy and decrease attack surface
-4. Encrypted disks with [VeraCrypt](https://www.veracrypt.fr/en/Home.html)
-5. DNSSEC with [NextDNS](https://nextdns.io/)

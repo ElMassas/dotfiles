@@ -1,18 +1,30 @@
 #!/bin/bash
 
-set -x
+set -xe
 
-# make sure depedencies are installed
-brew install libevent openssl unbound dnsmasq
+# Variables
+HOMEBREW_PATH="/opt/homebrew"
+UNBOUND_CONF_DIR="$HOMEBREW_PREFIX/etc/unbound"
+UNBOUND_PLIST="/Library/LaunchDaemons/nl.nlnetlabs.unbound.plist"
+DNSMASQ_CONF_DIR="$HOMEBREW_PREFIX/etc/dnsmasq"
+DNSMASQ_PLIST="/Library/LaunchDaemons/homebrew.dnsmasq.plist"
+LOG_DIR="/var/log"
+UNBOUND_LOG_DIR="/var/unbound"
+USER_ID="555"
+GROUP_ID="555"
 
-# Create unbound service && configure
-sudo touch /Library/LaunchDaemons/nl.nlnetlabs.unbound.plist
-sudo cp ~/.config/unbound/unbound.conf /opt/homebrew/etc/unbound/unbound.conf
-sudo chown unbound:unbound /opt/homebrew/etc/unbound/unbound.conf
-sudo chmod 644 /opt/homebrew/etc/unbound/unbound.conf
+install_dependencies() {
+    echo "Installing dependencies..."
+    brew install libevent openssl unbound dnsmasq || echo "Dependencies already installed."
+}
 
+configure_unbound() {
+    echo "Configuring Unbound..."
+    sudo cp ~/.config/unbound/unbound.conf "$UNBOUND_CONF_DIR/unbound.conf"
+    sudo chown -R unbound:unbound "$UNBOUND_CONF_DIR"
+    sudo chmod 644 "$UNBOUND_CONF_DIR/unbound.conf"
 
-sudo tee /Library/LaunchDaemons/nl.nlnetlabs.unbound.plist << 'EOF' > /dev/null
+    sudo tee "$UNBOUND_PLIST" > /dev/null << EOF
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
@@ -25,45 +37,40 @@ sudo tee /Library/LaunchDaemons/nl.nlnetlabs.unbound.plist << 'EOF' > /dev/null
     <true/>
     <key>ProgramArguments</key>
     <array>
-        <string>//opt/homebrew/opt/unbound</string>
+        <string>$HOMEBREW_PREFIX/sbin/unbound</string>
         <string>-c</string>
-        <string>/opt/homebrew/etc/unbound//unbound.conf</string>
+	      <string>$UNBOUND_CONF_DIR/unbound.conf</string>
     </array>
     <key>UserName</key>
     <string>root</string>
     <key>StandardErrorPath</key>
-    <string>/dev/null</string>
+    <string>/var/log/unbound.log</string>
     <key>StandardOutPath</key>
-    <string>/dev/null</string>
+    <string>/var/log/unbound.log</string>
     </dict>
 </plist>
 EOF
 
+    sudo chmod 644 "$UNBOUND_PLIST"
+    sudo mkdir -p "$UNBOUND_LOG_DIR"
+    sudo chown -R unbound:unbound "$UNBOUND_LOG_DIR"
+}
 
+create_unbound_user() {
+    echo "Creating Unbound user and group..."
+    sudo dscl . -create /Users/unbound || echo "User already exists."
+    sudo dscl . -create /Users/unbound UserShell /usr/bin/false
+    sudo dscl . -create /Users/unbound NFSHomeDirectory /var/empty
+    sudo dscl . -create /Users/unbound UniqueID "$USER_ID"
+    sudo dscl . -create /Users/unbound PrimaryGroupID "$GROUP_ID"
+    sudo dscl . -create /Groups/unbound || echo "Group already exists."
+    sudo dscl . -create /Groups/unbound PrimaryGroupID "$GROUP_ID"
+    sudo dscl . -append /Groups/unbound GroupMembership unbound
+}
 
-# Create unbound user
-sudo dscl . -create /Users/unbound
-sudo dscl . -create /Users/unbound UserShell /usr/bin/false
-sudo dscl . -create /Users/unbound NFSHomeDirectory /var/empty
-sudo dscl . -create /Users/unbound UniqueID "555"
-sudo dscl . -create /Users/unbound PrimaryGroupID 555
-sudo dscl . -create /Groups/unbound
-sudo dscl . -create /Groups/unbound PrimaryGroupID 555
-sudo dscl . -append /Groups/unbound GroupMembership unbound
-
-# Update permissions for unbound user
-sudo chown -R unbound:unbound /opt/homebrew/etc/unbound
-sudo mkdir -p /var/unbound
-sudo chown -R unbound:unbound /var/unbound
-sudo chmod 644 /Library/LaunchDaemons/nl.nlnetlabs.unbound.plist
-sudo chown unbound:unbound /opt/homebrew/etc/unbound/unbound_control.*
-
-
-
-# dnsmasq
-sudo touch /Library/LaunchDaemons/homebrew.dnsmasq.plist
-
-sudo tee /Library/LaunchDaemons/homebrew.dnsmasq.plist << 'EOF' > /dev/null
+configure_dnsmasq() {
+    echo "Configuring dnsmasq..."
+    sudo tee "$DNSMASQ_PLIST" > /dev/null << EOF
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
@@ -72,30 +79,39 @@ sudo tee /Library/LaunchDaemons/homebrew.dnsmasq.plist << 'EOF' > /dev/null
     <string>homebrew.dnsmasq</string>
     <key>ProgramArguments</key>
     <array>
-        <string>/opt/homebrew/sbin/dnsmasq</string>
+        <string>$HOMEBREW_PREFIX/sbin/dnsmasq</string>
         <string>--keep-in-foreground</string>
         <string>--conf-file</string>
-        <string>~/.config/dnsmasq/dnsmasq.conf</string>
+        <string>$DNSMASQ_CONF_DIR/dnsmasq.conf</string>
     </array>
     <key>RunAtLoad</key>
     <true/>
     <key>KeepAlive</key>
     <true/>
     <key>StandardErrorPath</key>
-    <string>/var/log/dnsmasq.err</string>
+    <string>$LOG_DIR/dnsmasq.err</string>
     <key>StandardOutPath</key>
-    <string>/var/log/dnsmasq.log</string>
+    <string>$LOG_DIR/dnsmasq.log</string>
 </dict>
 </plist>
 EOF
 
-sudo chmod 644 /Library/LaunchDaemons/homebrew.dnsmasq.plist
-sudo touch /var/log/dnsmasq.log /var/log/dnsmasq.err
-sudo chmod 644 /var/log/dnsmasq.log /var/log/dnsmasq.err
+    sudo chmod 644 "$DNSMASQ_PLIST"
+    sudo touch "$LOG_DIR/dnsmasq.log" "$LOG_DIR/dnsmasq.err"
+    sudo chmod 644 "$LOG_DIR/dnsmasq.log" "$LOG_DIR/dnsmasq.err"
+}
 
-sudo launchctl load /Library/LaunchDaemons/homebrew.dnsmasq.plist
-sudo launchctl load /Library/LaunchDaemons/nl.nlnetlabs.unbound.plist
+load_services() {
+    echo "Loading services..."
+    sudo launchctl load "$DNSMASQ_PLIST"
+    sudo launchctl load "$UNBOUND_PLIST"
+}
 
-# To test if this unbound config is working properly you can visit:
-# https://dnsviz.net/
-# https://dnssec-debugger.verisignlabs.com/
+# Main Script Execution
+install_dependencies
+create_unbound_user
+configure_unbound
+configure_dnsmasq
+load_services
+
+echo "Setup complete. Test your configuration at: https://dnsviz.net/ or https://dnssec-debugger.verisignlabs.com/"

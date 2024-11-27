@@ -24,9 +24,9 @@ update_hosts() {
     sudo killall -HUP mDNSResponder
 }
 
-cat() {
+vf() {
     local FILE="$1"
-    if [[ "$FILE" == *.md ]]; then
+    if [[ "$FILE" == *.md || "$FILE" == *.markdown || "$FILE" == *.mdown || "$FILE" == *.mkd || "$FILE" == *.mkdn || "$FILE" == *.mdtxt || "$FILE" == *.mdtext ]]; then
         mdcat "$FILE"
     else
         cat "$FILE"
@@ -39,6 +39,10 @@ to_do() {
 
 connected_devices() {
   system_profiler SPUSBDataType
+}
+
+drawio() {
+  podman run -it --rm --name="draw" -p 8080:9512 -p 8443:9514 jgraph/drawio
 }
 
 dns_cache_flush() {
